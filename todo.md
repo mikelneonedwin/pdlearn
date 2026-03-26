@@ -1,0 +1,5 @@
+## Installations
+
+- lefthook
+- drizzle
+- shadcn

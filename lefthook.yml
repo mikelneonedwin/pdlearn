@@ -1,0 +1,31 @@
+# EXAMPLE USAGE:
+#
+#   Refer for explanation to following link:
+#   https://lefthook.dev/configuration/
+#
+pre-push:
+  jobs:
+    - name: build
+      run: bun run build
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: "lint"
+      run: bunx eslint --fix --cache --no-warn-ignored {staged_files}
+      glob: "*.{js,ts,jsx,tsx}"
+
+    - name: "format"
+      run: bunx prettier --write --log-level silent {staged_files}
+      glob: "*.{js,ts,jsx,tsx,json,yml,md}"
+
+    - name: "typecheck web"
+      run: bun run typecheck:web
+      glob: "src/renderer/**/*.{js,ts,jsx,tsx}"
+
+    - name: "typecheck node"
+      run: bun run typecheck:node
+      glob:
+        - "electron.vite.config.*"
+        - "src/main/**/*.{js,ts}"
+        - "src/preload/**/*.{js,ts}"
