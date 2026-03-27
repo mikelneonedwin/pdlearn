@@ -32,7 +32,8 @@ export default defineConfig([
   {
     rules: {
       "@typescript-eslint/explicit-function-return-type": "off",
-      "prettier/prettier": "off"
+      "prettier/prettier": "off",
+      "react-refresh/only-export-components": "off"
     }
   }
 ])
